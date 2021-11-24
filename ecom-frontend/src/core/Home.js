@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-
+import Base from "./Base"
 import {getProducts} from "./helperJS/coreapicalls";
 
 export default function Home(){
@@ -24,7 +24,7 @@ export default function Home(){
     }, [])
 
     return (
-        <div>
+        <Base title="Home Page" description=" Welcome to Tech Store">
             <h1>Home component</h1>
             <div className="row">
                 {products.map( (product, index) => {
@@ -36,6 +36,6 @@ export default function Home(){
                     )
                 })}
             </div>
-        </div>
+        </Base>
     )
 }
