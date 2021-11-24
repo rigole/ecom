@@ -1,8 +1,8 @@
 import React from 'react'
 
 
-const ImageHelper = ({product}) => {
-    const imageUrl = product ? product.image : `https://www.pexels.com/fr-fr/photo/moniteur-d-ordinateur-a-ecran-plat-noir-1714208/`
+const ImageHelper = ({ product }) => {
+    const imageUrl = product ? product.image : `https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?cs=srgb&dl=pexels-josh-sorenson-1714208.jpg&fm=jpg`
     return (
         <div className="rounded border border-success p-2">
             <img src={imageUrl}
