@@ -1,15 +1,63 @@
 import React from 'react'
 import ImageHelper from "./helperJS/ImageHelper";
+import { Navigate } from "react-router-dom";
 
+//TODO: deal with this
+const isAuthenticated = false
 
 const Card = ({
                   product,
-                  addToCart = true,
+                  addToCart1 = true,
                   removeFromCart = false
               }) => {
          const cartTitle = product ? product.name : "A photo pexels"
          const cartDescription = product ? product.description : "A photo pexels"
          const cartPrice = product ? product.price : "Default"
+
+        const addToCart = () => {
+          if (isAuthenticated) {
+                console.log("Added to cart")
+          } else {
+              console.log("Login Please!")
+          }
+        }
+
+        const getARedirect = redirect => {
+             if (redirect) {
+                 return <Navigate to="/cart"/>
+             }
+        }
+
+        const showAddToCart = addToCart => {
+             return(
+                    addToCart && (
+                        <button
+                            onClick={addToCart}
+                            className="btn btn-block btn-outline-success mt-2 mb-2"
+                        >
+                                Add to Cart
+
+                            </button>
+                    )
+             )
+        }
+
+        const showRemoveFromCart = removeFromCart => {
+             return (
+                 removeFromCart && (
+                      <button
+                      onClick={() => {
+                          console.log("Product removed from cart ")
+                      }}
+                      className=" btn btn-block btn-outline-danger mt-2 mb-2"
+                  >
+                                Remove from Cart
+
+                  </button>
+                 )
+
+             )
+        }
         return (
             <div className="card text-white bg-dark border border-info">
                 <div className="card-header lead">{cartTitle}</div>
@@ -21,21 +69,10 @@ const Card = ({
                     <p className="btn btn-success rounded btn-sm px-4">{cartPrice} XAF</p>
                     <div className="row">
                         <div className="col-12">
-                            <button
-                                onClick={() => {}}
-                                className="btn btn-block btn-outline-success mt-2 mb-2"
-                            >
-                                Add to Cart
-
-                            </button>
+                            {showAddToCart(addToCart)}
                         </div>
                         <div className="col-12">
-                            <button
-                                onClick={() => {}}
-                                className=" btn btn-block btn-outline-danger mt-2 mb-2"
-                            >
-                                Remove from Cart
-                            </button>
+                            {showRemoveFromCart}
                         </div>
                     </div>
                 </div>
