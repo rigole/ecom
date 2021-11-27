@@ -21,7 +21,7 @@
     }
  }
 
- export const removeItemFromCart = productID => {
+ export const removeItemFromCart = (productID) => {
     let cart = []
      if (typeof window !== undefined) {
          if(localStorage.getItem("cart")) {

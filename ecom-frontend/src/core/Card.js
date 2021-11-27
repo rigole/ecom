@@ -1,7 +1,7 @@
 import React from 'react'
 import ImageHelper from "./helperJS/ImageHelper";
 import { Navigate } from "react-router-dom";
-import {addItemToCart} from "./helperJS/cartHelper";
+import {addItemToCart, removeItemFromCart} from "./helperJS/cartHelper";
 
 //TODO: deal with this
 const isAuthenticated = true
@@ -9,7 +9,7 @@ const isAuthenticated = true
 const Card = ({
                   product,
                   addToCart1 = true,
-                  removeFromCart = false
+                  removeFromCart = false,
               }) => {
          const cartTitle = product ? product.name : "A photo pexels"
          const cartDescription = product ? product.description : "A photo pexels"
@@ -44,11 +44,12 @@ const Card = ({
              )
         }
 
-        const showRemoveFromCart = removeFromCart => {
+        const showRemoveFromCart = (removeFromCart) => {
              return (
                  removeFromCart && (
                       <button
                       onClick={() => {
+                          removeItemFromCart(product._id)
                           console.log("Product removed from cart ")
                       }}
                       className=" btn btn-block btn-outline-danger mt-2 mb-2"
@@ -74,7 +75,7 @@ const Card = ({
                             {showAddToCart(addToCart)}
                         </div>
                         <div className="col-12">
-                            {showRemoveFromCart}
+                             {showRemoveFromCart(removeFromCart)}
                         </div>
                     </div>
                 </div>
