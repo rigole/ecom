@@ -22,7 +22,22 @@ const Signup = () => {
             setValues({...values, error: false})
             signup({name, email, password})
                 .then((data) => {
-                    console.log("DATA", data)
+                   if(data.email === email){
+                       setValues({
+                           ...values,
+                           name: "",
+                           email: "",
+                           password: "",
+                           error: "",
+                           success: true
+                       })
+                   } else {
+                       setValues({
+                           ...values,
+                           error: true,
+                           success: false
+                       })
+                   }
                 })
                 .catch((e) => console.log(e))
         }
