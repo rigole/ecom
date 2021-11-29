@@ -22,9 +22,56 @@ const Signup = () => {
             setValues({...values, error: false})
             signup({name, email, password})
                 .then((data) => {
-                    console.log("DATA", data)
+                   if(data.email === email){
+                       setValues({
+                           ...values,
+                           name: "",
+                           email: "",
+                           password: "",
+                           error: "",
+                           success: true
+                       })
+                   } else {
+                       setValues({
+                           ...values,
+                           error: true,
+                           success: false
+                       })
+                   }
                 })
                 .catch((e) => console.log(e))
+        }
+
+        const successMessage = () => {
+            return (
+                <div className="row">
+                    <div className="col-md-6 offset-sm-3 text-left">
+                        <div
+                            className="alert alert-success"
+                            style={{display: success ? "" : "none" }}
+
+                        >
+                              New account created successfully. Please login now
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        const errorMessage = () => {
+            return (
+                <div className="row">
+                    <div className="col-md-6 offset-sm-3 text-left">
+                        <div
+                            className="alert alert-danger"
+                            style={{display: error ? "" : "none" }}
+
+                        >
+                              Error while creating new user. Check fields again and Please try again
+                        </div>
+                    </div>
+                </div>
+            )
         }
 
         const SignUpForm = () => {
@@ -73,6 +120,8 @@ const Signup = () => {
 
     return (
         <Base title="Sign Up Page" description="A signup for LCO user">
+            {successMessage()}
+            {errorMessage()}
             {SignUpForm()}
             <p className="text-white text-center">
                 {JSON.stringify(values)}
