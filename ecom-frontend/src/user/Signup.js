@@ -51,7 +51,9 @@ const Signup = () => {
                             style={{display: success ? "" : "none" }}
 
                         >
-                              New account created successfully. Please login now
+                              New account created successfully. Please
+                            <Link to="/signin">login now</Link>
+
                         </div>
                     </div>
                 </div>
