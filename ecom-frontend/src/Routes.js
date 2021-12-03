@@ -8,15 +8,18 @@ import UserDashboard from "./user/UserDashboard";
 const Routs = () => {
     return (
         <BrowserRouter>
-     <Fragment>
+
             <Routes>
 
                 <Route path="/"  element={<Home/>} />
                 <Route path="/signup" exact element={<Signup/>} />
-                <PrivateRoutes path="/user/dashboard" exact element={<UserDashboard/>} />
+                <Route eaxct path="/user/dashboard" element ={<PrivateRoutes/>}>
+                      <Route exact path="/user/dashboard" element={<UserDashboard/>}/>
+                </Route>
+
 
             </Routes>
-          </Fragment>
+
         </BrowserRouter>
     )
 }
