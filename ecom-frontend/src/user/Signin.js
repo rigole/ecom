@@ -1,13 +1,14 @@
 import Base from "../core/Base";
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import {signin, authenticate, isAuthenticated } from "../auth/helper";
 
 const Signin = () => {
 
     const [values, setValues] = useState({
         name:"",
-        email:"",
-        password:"",
+        email:"foplacide@gmail.com",
+        password:"123",
         error:"",
         success: false,
         loading: false,
@@ -21,6 +22,21 @@ const Signin = () => {
             setValues({...values, error:false, [name]: event.target.value })
         }
 
+    const onSubmit = (event) => {
+        event.preventDefault()
+        setValues({...values, error: false, loading: true})
+        signin({ email, password })
+            .then(data => {
+                console.log("DATA", data)
+                if (data.token){
+                    let sessionToken = data.token
+                    authenticate(sessionToken, () => {
+                        console.log("Token added")
+                    })
+                }
+            })
+            .catch((err) => console.log(err))
+    }
      const successMessage = () => {
             return (
                 <div className="row">
@@ -81,7 +97,7 @@ const Signin = () => {
                             </div>
                             <button
                                 className="btn btn-success btn-block"
-                                onClick={() => {}}
+                                onClick={onSubmit}
                             >
                                 Sign In
                             </button>
