@@ -1,6 +1,6 @@
 import Base from "../core/Base";
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {signin, authenticate, isAuthenticated } from "../auth/helper";
 
 const Signin = () => {
@@ -32,10 +32,35 @@ const Signin = () => {
                     let sessionToken = data.token
                     authenticate(sessionToken, () => {
                         console.log("Token added")
+                        setValues({
+                            ...values,
+                            didRedirect: true,
+                        })
+                    })
+                } else {
+                    setValues({
+                        ...values,
+                        loading: false,
                     })
                 }
             })
             .catch((err) => console.log(err))
+    }
+    
+    const performRedirect = () => {
+        if (isAuthenticated()){
+            return <Navigate to="/" />
+        }
+    }
+
+    const loadingMessage = () => {
+        return (
+            loading && (
+                <div className="alert alert-info">
+                    <h2>Loading...</h2>
+                </div>
+            )
+        )
     }
      const successMessage = () => {
             return (
@@ -116,10 +141,12 @@ const Signin = () => {
 
     return (
         <Base title=" Welcome to sign in page" description=" A t-shirt store">
+            {loadingMessage()}
             {SignInForm()}
             <p className="text-center">
                 {JSON.stringify(values)}
             </p>
+            {performRedirect()}
         </Base>
     )
 }
