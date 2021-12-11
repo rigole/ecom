@@ -29,8 +29,8 @@ const Signin = () => {
             .then(data => {
                 console.log("DATA", data)
                 if (data.token){
-                    let sessionToken = data.token
-                    authenticate(sessionToken, () => {
+                    //let sessionToken = data.token
+                    authenticate(data, () => {
                         console.log("Token added")
                         setValues({
                             ...values,
@@ -49,7 +49,7 @@ const Signin = () => {
     
     const performRedirect = () => {
         if (isAuthenticated()){
-            return <Navigate to="/" />
+            return <Navigate to="/"  />
         }
     }
 
