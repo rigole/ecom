@@ -1,6 +1,7 @@
 import {API} from "../../backend";
 import {cartEmpty} from "../../core/helperJS/cartHelper";
 
+
 export const signup = user => {
     return fetch (`${API}user/`,{
         method: "POST",
@@ -52,7 +53,7 @@ export const authenticate = (data, next) => {
 }
 
 export const isAuthenticated = () => {
-    if (typeof window == undefined) {
+    if (typeof window === undefined) {
         return false
     }
     if (localStorage.getItem("jwt")){
@@ -61,7 +62,12 @@ export const isAuthenticated = () => {
         return false
     }
 }
-export const signout = next => {
+export const signout = (next) => {
+    /*let headers = new Headers()
+    headers.append('Content-Type', 'application/json')
+    headers.append('Accept', 'application/json')
+    headers.append('Access-Control-Allow-Origin', 'http://localhost:3000')
+    headers.append('Access-Control-Allow-Credentials', 'true')*/
     const userId = isAuthenticated() && isAuthenticated().user.id
 
     if(typeof window !== undefined){
@@ -70,9 +76,9 @@ export const signout = next => {
 
 
         return fetch(`${API}user/logout/${userId}`, {
-            method: "GET"
+            method: "GET",
         })
-            .then(response => {
+            .then((response) => {
                 console.log("Signout success")
                 next()
             })

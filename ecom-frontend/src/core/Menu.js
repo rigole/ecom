@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {Link, Navigate, NavLink, withRouter} from "react-router-dom";
 import Signin from "../user/Signin";
 import {signout, isAuthenticated} from "../auth/helper"
@@ -25,27 +25,35 @@ const Menu = ({history, path}) => {
                             <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
                         </li>
 
-                        <li className="nav-item">
+                        {!isAuthenticated() && (
+                            <Fragment>
+                                 <li className="nav-item">
                             <Link className="nav-link" to="/signin">Signin</Link>
                         </li>
-                        <li className="nav-item">
+                                <li className="nav-item">
                             <Link className="nav-link" to="/signup">Signup</Link>
                         </li>
-                         <li className="nav-item">
+                            </Fragment>
+                        )}
+                        { isAuthenticated() && (
+                             <li className="nav-item">
                             <Link className="nav-link" to="/user/dashboard">DashBoard</Link>
                         </li>
+                        )}
                     </ul>
-                    <form className="form-inline my-2 my-lg-0">
+
                          <Link className="nav-link" to="/signin">Cart</Link>
-                         <Link onClick={() => {
+
+                        {isAuthenticated() && (
+                             <Link onClick={() => {
                              signout(() => {
-                                 history.push("/")
+                               <Link className="nav-link" to="/"/>
                              })
                          }} className="nav-link" to="/">
                              Signout
                          </Link>
+                        )}
 
-                    </form>
                 </div>
             </nav>
         </div>
