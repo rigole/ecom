@@ -62,12 +62,9 @@ export const isAuthenticated = () => {
         return false
     }
 }
+
 export const signout = (next) => {
-    /*let headers = new Headers()
-    headers.append('Content-Type', 'application/json')
-    headers.append('Accept', 'application/json')
-    headers.append('Access-Control-Allow-Origin', 'http://localhost:3000')
-    headers.append('Access-Control-Allow-Credentials', 'true')*/
+
     const userId = isAuthenticated() && isAuthenticated().user.id
 
     if(typeof window !== undefined){
@@ -75,7 +72,7 @@ export const signout = (next) => {
         cartEmpty(() => {})
 
 
-        return fetch(`${API}user/logout/${userId}`, {
+        return fetch(`${API}user/logout/${userId}/`, {
             method: "GET",
         })
             .then((response) => {

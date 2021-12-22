@@ -4,6 +4,7 @@ import Signin from "../user/Signin";
 import {signout, isAuthenticated} from "../auth/helper"
 
 
+
 const currentTab = (history, path) => {
 
 }
@@ -45,13 +46,11 @@ const Menu = ({history, path}) => {
                          <Link className="nav-link" to="/signin">Cart</Link>
 
                         {isAuthenticated() && (
-                             <Link onClick={() => {
-                             signout(() => {
-                               <Link className="nav-link" to="/"/>
-                             })
-                         }} className="nav-link" to="/">
-                             Signout
-                         </Link>
+                            <li>
+                                 <Link onClick={() => {signout(() => {<Navigate className="nav-link" to="/"/>})}} className="nav-link" to="/">
+                                      Signout
+                                </Link>
+                            </li>
                         )}
 
                 </div>
