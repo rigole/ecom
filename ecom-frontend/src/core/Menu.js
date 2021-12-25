@@ -43,7 +43,7 @@ const Menu = ({history, path}) => {
                         )}
                     </ul>
 
-                         <Link className="nav-link" to="/signin">Cart</Link>
+                         <Link className="nav-link" to="/cart">Cart</Link>
 
                         {isAuthenticated() && (
                             <li>
