@@ -1,6 +1,7 @@
 import {API} from "../../backend";
 import {cartEmpty} from "../../core/helperJS/cartHelper";
 
+
 export const signup = user => {
     return fetch (`${API}user/`,{
         method: "POST",
@@ -23,11 +24,22 @@ export const signin = user => {
         formData.append(name, user[name])
     }
 
+    /*const {email, password} = user
+    formData.append('email', email)
+    formData.append('password', password)*/
+
+    for (let key of formData.keys()){
+        console.log("My Key: ", key)
+    }
+
+
+
     return fetch(`${API}user/login/`, {
         method: "POST",
-        body: FormData
+        body: formData
     })
-        .then(response => {
+        .then( (response) => {
+            console.log("SUCCESS", response)
             return response.json()
         })
         .catch((error) => console.log(error))
@@ -41,7 +53,7 @@ export const authenticate = (data, next) => {
 }
 
 export const isAuthenticated = () => {
-    if (typeof window == undefined) {
+    if (typeof window === undefined) {
         return false
     }
     if (localStorage.getItem("jwt")){
@@ -50,7 +62,9 @@ export const isAuthenticated = () => {
         return false
     }
 }
-export const signout = next => {
+
+export const signout = (next) => {
+
     const userId = isAuthenticated() && isAuthenticated().user.id
 
     if(typeof window !== undefined){
@@ -58,10 +72,10 @@ export const signout = next => {
         cartEmpty(() => {})
 
 
-        return fetch(`${API}user/logout/${userId}`, {
-            method: "GET"
+        return fetch(`${API}user/logout/${userId}/`, {
+            method: "GET",
         })
-            .then(response => {
+            .then((response) => {
                 console.log("Signout success")
                 next()
             })
