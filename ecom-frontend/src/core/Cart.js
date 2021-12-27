@@ -4,11 +4,14 @@ import Card from "./Card";
 import {loadCart} from "./helperJS/cartHelper";
 export const Cart =() => {
 
+    const [reload, setReload] = useState(false)
     const [products, setProducts] = useState([])
+
 
     useEffect(() => {
         setProducts(loadCart())
-    }, [])
+    }, [reload])
+
     const loadAllProducts = (products) => {
         return (
             <div>
@@ -18,6 +21,8 @@ export const Cart =() => {
                         product={product}
                         removeFromCart={true}
                         addToCart1={false}
+                        reload={reload}
+                        setReload={setReload}
                     />
                 ))}
             </div>
