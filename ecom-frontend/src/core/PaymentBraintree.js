@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from "react";
-import {Navigate} from "react-router-dom";
+import {Navigate, Redirect} from "react-router-dom";
 import {cartEmpty} from "./helperJS/cartHelper";
 import {getmeToken, processPayment} from "./helperJS/paymentHelper";
 import {createOrder} from "./helperJS/orderHelper";
 import {isAuthenticated, signout} from "../auth/helper";
 import DropIn from "braintree-web-drop-in-react";
 import {parse} from "query-string";
+import {observe} from "web-vitals/dist/modules/lib/observe";
+
+// TODO `Every where there is a console log I should create a components to render all of them`
+
 
 const PaymentBraintree = ({
     products,
@@ -57,6 +61,71 @@ const PaymentBraintree = ({
 
     }
 
+    const onPurchase = () => {
+        setInfo({loading: true})
+        let nonce;
+        let getNonce = info.instance.requestPaymentMethod()
+            .then( data => {
+                nonce = data.nonce
+                const paymentData = {
+                    PaymentMethodNonce: nonce,
+                    amount: getAmount()
+                }
+                processPayment(userId, token, paymentData)
+                    .then(response => {
+                        if(response.error) {
+                            if (response.code == '1'){
+                                console.log("Payment Failed")
+                                signout(() => {
+                                    return <Navigate to="/" />
+                                })
+                            }
+                        }else {
+                            setInfo({...info,
+                                 success: response.success, loading: false
+                            })
+                            console.log("PAYMENT SUCCESS")
+                            let product_names = ""
+                            products.forEach(function(item){
+                                product_names += item.name + ", "
+                            })
+                            const orderData = {
+                                products: product_names,
+                                transaction_id: response.transaction.id,
+                                amount: response.transaction.amount
+                            }
+                              createOrder(userId, token, orderData)
+                            .then(response => {
+                                if (response.error){
+                                    if(response.code == "1"){
+                                        console.log("ORDER FAILED")
+                                    }
+                                    signout(() => {
+                                        return <Navigate to="/"/>
+                                    })
+                                }else {
+                                    if (response.success === true){
+                                        console.log("ORDER PLACED")
+                                    }
+                                }
+                            })
+                            .catch(error =>{
+                                setInfo({loading: false, success: false})
+                                console.log("ORDER FAILED", error)
+                            })
+                            cartEmpty(() => {
+                                console.log("Cart is Emptied out")
+                            })
+
+                            setReload(!reload)
+                        }
+
+                })
+                    .catch(error => console.log(error))
+            })
+            .catch(error => console.log("Nonce", error))
+    }
+
     const showbtnDropIn = () => {
             return (
                 <div>
@@ -84,7 +153,7 @@ const PaymentBraintree = ({
     }
     return (
         <div>
-            <h3>Your bill is {getAmount()}</h3>
+            <h3>Your bill is $ {getAmount()}</h3>
             {showbtnDropIn()}
         </div>
     )
