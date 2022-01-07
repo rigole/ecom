@@ -17,17 +17,18 @@ const PaymentBraintree = ({
     setReload = (f) => f,
       }) => {
 
-        const [info, setInfo] = useState({
-            loading: false,
-            success: false,
-            clientToken: null,
-            error: "",
-            instance: {}
-        })
+    const [info, setInfo] = useState({
+        loading: false,
+        success: false,
+        clientToken: null,
+        error: "",
+        instance: {},
+    })
 
 
     const userId = isAuthenticated && isAuthenticated().user.id
     const token = isAuthenticated && isAuthenticated().token
+    const updateInfo ={}
 
     const getToken = (userId, token) => {
             getmeToken(userId, token)
@@ -42,8 +43,12 @@ const PaymentBraintree = ({
                             return <Navigate to="/"/>
                         })
                     } else {
+
                         const clientToken = info.clientToken
-                        setInfo({clientToken})
+                        setInfo({
+                            ...info,
+                            clientToken
+                        })
                     }
                 })
     }
@@ -62,8 +67,12 @@ const PaymentBraintree = ({
     }
 
     const onPurchase = () => {
-        setInfo({loading: true})
+        setInfo({
+            ...info,
+            loading: true
+        })
         let nonce;
+
         let getNonce = info.instance.requestPaymentMethod()
             .then( data => {
                 nonce = data.nonce
@@ -72,7 +81,7 @@ const PaymentBraintree = ({
                     amount: getAmount()
                 }
                 processPayment(userId, token, paymentData)
-                    .then(response => {
+                    .then((response) => {
                         if(response.error) {
                             if (response.code == '1'){
                                 console.log("Payment Failed")
@@ -121,7 +130,7 @@ const PaymentBraintree = ({
                         }
 
                 })
-                    .catch(error => console.log(error))
+                    .catch((error )=> console.log(error))
             })
             .catch(error => console.log("Nonce", error))
     }
@@ -138,7 +147,12 @@ const PaymentBraintree = ({
                                     onInstance={(instance) => (info.instance = instance)}
                                     >
                                          </DropIn>
-                                        <button className="btn btn-block btn-success">Pay now</button>
+                                        <button
+                                            className="btn btn-block btn-success"
+                                            onClick={onPurchase}
+                                        >
+                                            Pay now
+                                        </button>
 
                                 </div>
                             ) :

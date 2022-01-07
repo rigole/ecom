@@ -10,7 +10,7 @@ export const getmeToken = (userId, token) => {
     .catch((error) => console.log(error))
 }
 
-export const processPayment = (userId, token, paymentInfo) => {
+export const processPayment = (userId, paymentInfo,token) => {
     const formData = new FormData()
 
     for(const name in paymentInfo){
@@ -19,7 +19,8 @@ export const processPayment = (userId, token, paymentInfo) => {
 
     return fetch(`${API}payment/process/${userId}/${token}/` ,{
         method: "POST",
-        body: formData
+        body: formData,
+
     })
         .then(response => {
          return response.json()
