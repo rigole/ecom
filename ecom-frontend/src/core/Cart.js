@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import Base from "../core/Base";
 import Card from "./Card";
 import {loadCart} from "./helperJS/cartHelper";
+import PaymentBraintree from "./PaymentBraintree";
 export const Cart =() => {
 
     const [reload, setReload] = useState(false)
@@ -43,9 +44,17 @@ export const Cart =() => {
          <div className="row text-center">
              <div className="col-6">
                  {loadAllProducts(products)}
-             </div>
+             </div> 
              <div className="col-6">
-                 {loadCheckout()}
+                 {products.length > 0 ?
+                     (
+                         <PaymentBraintree products={products} setReload={setReload}/>
+                     )
+                     :
+                     (
+                         <h3>Please login or Add something to your cart</h3>
+                     )
+                 }
              </div>
          </div>
         </Base>
