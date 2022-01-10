@@ -4,7 +4,7 @@ import Card from "./Card";
 import {loadCart} from "./helperJS/cartHelper";
 import PaymentBraintree from "./PaymentBraintree";
 export const Cart =() => {
-
+// TODO `remove add to cart when added to cart`  //Done
     const [reload, setReload] = useState(false)
     const [products, setProducts] = useState([])
 
@@ -21,7 +21,7 @@ export const Cart =() => {
                         key={index}
                         product={product}
                         removeFromCart={true}
-                        addToCart1={false}
+                        addToCart={false}
                         reload={reload}
                         setReload={setReload}
                     />
