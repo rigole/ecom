@@ -6,7 +6,7 @@ import { isAuthenticated } from "../auth/helper";
 
 const Card = ({
       product,
-      addtoCart = true,
+      addToCart = true,
       removeFromCart = false,
       reload = undefined,
       setReload = f => f,
@@ -20,7 +20,7 @@ const Card = ({
      const cartDescription = product ? product.description : "A photo pexels"
      const cartPrice = product ? product.price : "Default"
 
-    const addToCart = () => {
+    const addtoCart = () => {
       if (isAuthenticated()) {
           addItemToCart(product, ()=> setRedirect(true))
             console.log("Added to cart")
@@ -35,11 +35,11 @@ const Card = ({
          }
     }
 
-    const showAddToCart = addToCart => {
+    const showAddToCart = (addToCart) => {
          return(
-                addtoCart && (
+                addToCart && (
                     <button
-                        onClick={addToCart}
+                        onClick={addtoCart}
                         className="btn btn-block btn-outline-success mt-2 mb-2"
                     >
                             Add to Cart
