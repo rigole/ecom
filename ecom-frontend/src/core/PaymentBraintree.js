@@ -94,15 +94,7 @@ const PaymentBraintree = ({
                                  success: response.success, loading: false
                             })
                             console.log("PAYMENT SUCCESS")
-                            let product_names = ""
-                            products.forEach(function(item){
-                                product_names += item.name + ", "
-                            })
-                            const orderData = {
-                                products: product_names,
-                                transaction_id: response.transaction.id,
-                                amount: response.transaction.amount
-                            }
+
                               createOrder(userId, token, orderData)
                             .then(response => {
                                 if (response.error){
@@ -134,8 +126,21 @@ const PaymentBraintree = ({
             })
             .catch(error => console.log("Nonce", error))
     }
+                            let product_names = ""
+                            products.forEach(function(item){
+                                product_names += item.name + ", "
+                            })
+                            const orderData = {
+                                products: product_names,
+                                transaction_id: 1993,
+                                amount: getAmount()
+                            }
+                            createOrder(userId, token, orderData)
+
+
 
     const showbtnDropIn = () => {
+
             return (
                 <div>
                     {
@@ -150,6 +155,7 @@ const PaymentBraintree = ({
                                         <button
                                             className="btn btn-block btn-success"
                                             onClick={onPurchase}
+
                                         >
                                             Pay now
                                         </button>
