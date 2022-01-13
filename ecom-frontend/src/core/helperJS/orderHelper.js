@@ -7,7 +7,7 @@ export const createOrder = (userId, token, orderData) => {
         formData.append(name, orderData[name])
     }
 
-    return fetch(`http://127.0.0.1:8000/api/order/add/${userId}/${token}/`, {
+    return fetch(`${API}order/add/${userId}/${token}/`, {
         method: "POST",
         body: formData
     })
