@@ -9,6 +9,7 @@ import {parse} from "query-string";
 import {observe} from "web-vitals/dist/modules/lib/observe";
 
 // TODO `Every where there is a console log I should create a components to render all of them`
+// TODO setting the right call of the order function
 
 
 const PaymentBraintree = ({

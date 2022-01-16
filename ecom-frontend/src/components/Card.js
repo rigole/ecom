@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import ImageHelper from "./helperJS/ImageHelper";
+import ImageHelper from "../core/helperJS/ImageHelper";
 import { Navigate } from "react-router-dom";
-import {addItemToCart, removeItemFromCart} from "./helperJS/cartHelper";
+import {addItemToCart, removeItemFromCart} from "../core/helperJS/cartHelper";
 import { isAuthenticated } from "../auth/helper";
 
 const Card = ({

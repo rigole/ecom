@@ -1,5 +1,5 @@
 import React from 'react'
-import Base from "../core/Base"
+import Base from "../components/Base"
 
 const UserDashboard = () => {
     return (

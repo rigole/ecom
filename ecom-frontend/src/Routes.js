@@ -1,11 +1,11 @@
 import React, {Fragment} from "react"
-import Home from "./core/Home";
+import Home from "./components/Home";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Signup from "./user/Signup";
 import PrivateRoutes from "./auth/helper/PrivateRoutes";
 import UserDashboard from "./user/UserDashboard";
 import Signin from "./user/Signin";
-import {Cart} from "./core/Cart";
+import {Cart} from "./components/Cart";
 
 const Routs = () => {
     return (
