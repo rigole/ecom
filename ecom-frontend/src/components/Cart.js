@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
-import Base from "../core/Base";
+import Base from "./Base";
 import Card from "./Card";
-import {loadCart} from "./helperJS/cartHelper";
-import PaymentBraintree from "./PaymentBraintree";
+import {loadCart} from "../core/helperJS/cartHelper";
+import PaymentBraintree from "../core/PaymentBraintree";
 export const Cart =() => {
 // TODO `remove add to cart when added to cart`  //Done
     const [reload, setReload] = useState(false)

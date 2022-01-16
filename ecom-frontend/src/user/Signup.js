@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Base from "../core/Base";
+import Base from "../components/Base";
 import {Link} from "react-router-dom";
 import {signup} from "../auth/helper";
 

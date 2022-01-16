@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Base from "./Base"
-import {getProducts} from "./helperJS/coreapicalls";
+import {getProducts} from "../core/helperJS/coreapicalls";
 import Card from "./Card";
 
 export default function Home(){
@@ -23,6 +23,7 @@ export default function Home(){
     useEffect(() => {
         loadAllProducts()
     }, [])
+    // TODO: create a Pop Up when clicking on add a product to the cart
 
     return (
         <Base title="Home Page" description=" Welcome to Tech Store">

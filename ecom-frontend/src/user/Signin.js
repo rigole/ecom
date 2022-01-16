@@ -1,4 +1,4 @@
-import Base from "../core/Base";
+import Base from "../components/Base";
 import React, {useState} from "react";
 import {Link, Navigate} from "react-router-dom";
 import {signin, authenticate, isAuthenticated } from "../auth/helper";
