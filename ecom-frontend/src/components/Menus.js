@@ -181,11 +181,15 @@ const Menus = ({history, path}) => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+
+
+                        <Tooltip title="Open settings">
+                          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                          </IconButton>
+                        </Tooltip>
+
+     { isAuthenticated() && (
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -202,12 +206,24 @@ const Menus = ({history, path}) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Test1</Typography>
                 </MenuItem>
-              ))}
+
+
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Test1</Typography>
+                </MenuItem>
+
+
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Test1</Typography>
+                </MenuItem>
+
             </Menu>
+
+         )}
           </Box>
         </Toolbar>
       </Container>
