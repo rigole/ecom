@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {Link, Navigate, NavLink, withRouter} from "react-router-dom";
+import {Link, Navigate, NavLink, withRouter, useNavigate} from "react-router-dom";
 import Signin from "../user/Signin";
 import {signout, isAuthenticated} from "../auth/helper"
 import AppBar from '@mui/material/AppBar';
@@ -26,7 +26,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 const Menus = ({history, path}) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null)
     const [anchorElUser, setAnchorUser] = React.useState(null)
-
+    const signInNavigate = useNavigate()
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget)
     }
@@ -38,6 +38,9 @@ const Menus = ({history, path}) => {
     }
     const handleCloseUserMenu = () => {
         setAnchorUser(null)
+    }
+    const handleSignInClick = () => {
+        signInNavigate("/signin");
     }
 
     return (
@@ -184,12 +187,10 @@ const Menus = ({history, path}) => {
 
 
                         <Button
-
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-           Sign In
-              </Button>
+                            onClick={handleSignInClick} sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Sign In
+                         </Button>
 
 
                       </Box>
