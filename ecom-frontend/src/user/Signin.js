@@ -1,6 +1,8 @@
 import Base from "../components/Base";
 import React, {useState} from "react";
 import {Link, Navigate} from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
 import {signin, authenticate, isAuthenticated } from "../auth/helper";
 
 const Signin = () => {
@@ -101,16 +103,9 @@ const Signin = () => {
                 <div className="row">
                     <div className="col-md-6 offset-sm-3 text-left">
                         <form action="">
-
-                            <div className="form-group">
-                                <label className="text-light">Email</label>
-                                <input
-                                    className="form-control"
-                                    value={email}
-                                    onChange={handleChange("email")}
-                                    type="email"
-                                />
-                            </div>
+                            <FormControl fullWidth sx={{ m: 1}}>
+                                 <TextField id="outlined-basic" label="email" variant="outlined"/>
+                            </FormControl>
                             <div className="form-group">
                                 <label className="text-light">password</label>
                                 <input
