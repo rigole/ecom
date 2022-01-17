@@ -170,16 +170,40 @@ const Menus = ({history, path}) => {
               >
                    CAtegories
               </Button>
-               <Button
+
+
+              { !isAuthenticated() && (
+                  <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                   <Button
 
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-           CART
+           Sign Up
               </Button>
+
+
+                        <Button
+
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+           Sign In
+              </Button>
+
+
+                      </Box>
+
+
+
+     )}
 
           </Box>
 
+
+
+
+             { isAuthenticated() && (
           <Box sx={{ flexGrow: 0 }}>
 
 
@@ -189,7 +213,9 @@ const Menus = ({history, path}) => {
                           </IconButton>
                         </Tooltip>
 
-     { isAuthenticated() && (
+
+
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -227,8 +253,20 @@ const Menus = ({history, path}) => {
 
             </Menu>
 
-         )}
+
           </Box>
+                  )}
+
+              <Button
+
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+           CART
+              </Button>
+
+
+
         </Toolbar>
       </Container>
     </AppBar>
