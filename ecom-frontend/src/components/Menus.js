@@ -208,17 +208,21 @@ const Menus = ({history, path}) => {
             >
 
                 <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Test1</Typography>
+                  <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
 
 
                 <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Test1</Typography>
+                  <Typography textAlign="center">Dashboard</Typography>
                 </MenuItem>
 
+                  <MenuItem  onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">Account</Typography>
+                 </MenuItem>
 
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Test1</Typography>
+
+                <MenuItem  onClick={() => {signout(() => {<Navigate className="nav-link" to="/"/>})}}>
+                  <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
 
             </Menu>
