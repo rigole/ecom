@@ -4,6 +4,8 @@ import {Link, Navigate} from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import IconButton from '@mui/material/IconButton';
 import FormControl from "@mui/material/FormControl";
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -132,26 +134,28 @@ const Signin = () => {
                                  />
                             </FormControl>
                             <FormControl fullWidth sx={{ m: 1}}>
-                                 <TextField
-                                     id="outlined-basic"
-                                     label=""
-                                     color="success"
-                                     focused
-                                     variant="outlined"
-                                     value={password}
-                                     onChange={handleChange("password")}
-                                 >
-                                     <InputAdornment>
-                                        <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        >
-                                              {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                  <InputLabel>Paasword</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        type={values.showPassword ? 'text' : 'password'}
+                                        value={values.password}
 
-                                        </IconButton>
-                                     </InputAdornment>
-                                 </TextField>
+                                        onChange={handleChange('password')}
+                                        endAdornment={
+                                         <InputAdornment position="end">
+                                            <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                            >
+                                                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
+
+                                            </IconButton>
+                                         </InputAdornment>
+                                        }
+                                   />
+
                             </FormControl>
 
                             <button
