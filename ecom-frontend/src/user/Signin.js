@@ -2,7 +2,13 @@ import Base from "../components/Base";
 import React, {useState} from "react";
 import {Link, Navigate} from "react-router-dom";
 import TextField from "@mui/material/TextField";
+import IconButton from '@mui/material/IconButton';
 import FormControl from "@mui/material/FormControl";
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
 import {signin, authenticate, isAuthenticated } from "../auth/helper";
 
 const Signin = () => {
@@ -14,15 +20,27 @@ const Signin = () => {
         error:"",
         success: false,
         loading: false,
-        didRedirect: false
+        didRedirect: false,
+        showPassword: false
     })
 
+    const handleClickShowPassword = () => {
+      setValues({
+          ...values,
+          showPassword: !values.showPassword,
+      })
+    }
+
+    const handleMouseDownPassword = (event) =>{
+        event.preventDefault()
+    }
 
     const { name, email, password, error, success, loading, didRedirect } = values
     const handleChange = (name) =>
         (event) => {
             setValues({...values, error:false, [name]: event.target.value })
         }
+
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -99,22 +117,47 @@ const Signin = () => {
         }
 
      const SignInForm = () => {
-            return(
+
+         return(
                 <div className="row">
                     <div className="col-md-6 offset-sm-3 text-left">
                         <form action="">
                             <FormControl fullWidth sx={{ m: 1}}>
-                                 <TextField id="outlined-basic" label="email" variant="outlined"/>
+                                 <TextField
+                                     id="outlined-basic"
+                                     label=""
+                                     color="success"
+                                     focused
+                                     variant="outlined"
+                                     value={email}
+                                     onChange={handleChange("email")}
+                                 />
                             </FormControl>
-                            <div className="form-group">
-                                <label className="text-light">password</label>
-                                <input
-                                    className="form-control"
-                                    value={password}
-                                    onChange={handleChange("password")}
-                                    type="password"
-                                />
-                            </div>
+                            <FormControl fullWidth sx={{ m: 1}}>
+                                  <InputLabel>Paasword</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        type={values.showPassword ? 'text' : 'password'}
+                                        value={values.password}
+
+                                        onChange={handleChange('password')}
+                                        endAdornment={
+                                         <InputAdornment position="end">
+                                            <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                            >
+                                                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
+
+                                            </IconButton>
+                                         </InputAdornment>
+                                        }
+                                   />
+
+                            </FormControl>
+
                             <button
                                 className="btn btn-success btn-block"
                                 onClick={onSubmit}
