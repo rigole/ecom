@@ -26,7 +26,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 const Menus = ({history, path}) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null)
     const [anchorElUser, setAnchorUser] = React.useState(null)
-    const signInNavigate = useNavigate()
+    const setNavigate = useNavigate()
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget)
     }
@@ -40,7 +40,13 @@ const Menus = ({history, path}) => {
         setAnchorUser(null)
     }
     const handleSignInClick = () => {
-        signInNavigate("/signin");
+        setNavigate("/signin");
+    }
+    const handleSignUpClick = () => {
+        setNavigate("/signup")
+    }
+    const handleCartClick = () => {
+        setNavigate("/cart")
     }
 
     return (
@@ -179,7 +185,7 @@ const Menus = ({history, path}) => {
                   <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                    <Button
 
-                onClick={handleCloseNavMenu}
+                onClick={handleSignUpClick}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
            Sign Up
@@ -260,7 +266,7 @@ const Menus = ({history, path}) => {
 
               <Button
 
-                onClick={handleCloseNavMenu}
+                onClick={handleCartClick}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
            CART

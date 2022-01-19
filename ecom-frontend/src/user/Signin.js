@@ -9,7 +9,13 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
+import { makeStyles } from '@mui/styles';
 import {signin, authenticate, isAuthenticated } from "../auth/helper";
+
+
+const my = makeStyles({
+
+})
 
 const Signin = () => {
 
@@ -128,18 +134,19 @@ const Signin = () => {
                                      label=""
                                      color="success"
                                      focused
+                                     className=""
                                      variant="outlined"
                                      value={email}
                                      onChange={handleChange("email")}
                                  />
                             </FormControl>
-                            <FormControl fullWidth sx={{ m: 1}}>
-                                  <InputLabel>Paasword</InputLabel>
+                            <FormControl fullWidth sx={{ m: 1}} color="success">
+                                  <InputLabel>Password</InputLabel>
                                     <OutlinedInput
                                         id="outlined-adornment-password"
                                         type={values.showPassword ? 'text' : 'password'}
                                         value={values.password}
-
+                                        color="success"
                                         onChange={handleChange('password')}
                                         endAdornment={
                                          <InputAdornment position="end">
@@ -152,6 +159,7 @@ const Signin = () => {
                                                   {values.showPassword ? <VisibilityOff /> : <Visibility />}
 
                                             </IconButton>
+
                                          </InputAdornment>
                                         }
                                    />
