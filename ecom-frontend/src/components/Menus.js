@@ -45,6 +45,9 @@ const Menus = ({history, path}) => {
     const handleSignUpClick = () => {
         setNavigate("/signup")
     }
+    const handleCartClick = () => {
+        setNavigate("/cart")
+    }
 
     return (
        /* <div>
@@ -263,7 +266,7 @@ const Menus = ({history, path}) => {
 
               <Button
 
-                onClick={handleCloseNavMenu}
+                onClick={handleCartClick}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
            CART
