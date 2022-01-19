@@ -48,6 +48,9 @@ const Menus = ({history, path}) => {
     const handleCartClick = () => {
         setNavigate("/cart")
     }
+    const handleHomeClick = () => {
+        setNavigate("/")
+    }
 
     return (
        /* <div>
@@ -167,7 +170,7 @@ const Menus = ({history, path}) => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               <Button
 
-                onClick={handleCloseNavMenu}
+                onClick={handleHomeClick}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
            Products
